@@ -1,6 +1,6 @@
 # LettucePlayer Releases
 
-生菜播放器 / LettucePlayer 是一款面向 Windows 的轻量绿色视频预览播放器，用于快速回看影视设备拍摄的视频素材。它重点改善 Log、HLG、PQ / HDR 等素材在普通播放器中灰暗、曝光观感不直观的问题，适合拍摄现场、素材筛选和后期制作前的快速预览，提供LUT快速套用和基础监看功能，并提供视频渲染信息细节，适配当前主流播放器操作习惯。
+生菜播放器 / LettucePlayer 是一款面向 Windows 的轻量绿色视频预览播放器，用于快速回看影视设备拍摄的视频素材。它重点改善 Log、HLG、PQ / HDR 等素材在普通播放器中灰暗、曝光观感不直观的问题，适合拍摄现场、素材筛选和后期制作前的快速预览，提供 LUT 快速套用和基础监看功能，并提供视频渲染信息细节，适配当前主流播放器操作习惯。
 
 本仓库是 LettucePlayer 的官方二进制发布渠道。
 
@@ -9,7 +9,7 @@
 - **绿色免安装**：解压即可运行，不写入注册表，不自动关联视频格式。
 - **面向拍摄素材**：支持打开单个视频、拖入多个文件或整个文件夹，并通过当前目录素材列表快速切换。
 - **Log / HLG / HDR 预览**：基于 mpv `gpu-next`、D3D11 和 libplacebo 渲染，提供自动处理和可手动选择的 SDR Preview / Tone Mapping 预设。
-- **\.cube LUT**：扫描程序目录下的 `luts/` 文件夹，支持按子目录浏览、搜索、启用和快速切换；手动选择后立即应用。
+- **`.cube` LUT**：扫描程序目录下的 `luts/` 文件夹，支持按子目录浏览、搜索、启用和快速切换；手动选择后立即应用。
 - **基础画面调整**：提供对比度、Gamma、饱和度、重置和文件夹预设；这些操作只改变预览效果。
 - **监看辅助**：提供最终输出画面的 RGB 波形图、直方图和伪色辅助，以及渲染管线、色彩、解码和 mpv 诊断信息。
 - **常用播放操作**：播放/暂停、定位、逐帧、音量、静音、音轨、字幕显隐、上一/下一素材、全屏、截图和预览旋转。
@@ -18,9 +18,18 @@
 
 > LettucePlayer 的定位是“快速、直观地预览素材”，不是剪辑、调色、转码或素材管理软件。画面处理结果不应替代专业母版、广播合规或色彩精确验收；首版也不支持 RAW 视频或 HDR 显示器输出工作流。
 
+## 发布包选择
+
+正式发布将提供两种 Windows x64 绿色包：
+
+- **self-contained（推荐）**：包含所需的 .NET 桌面运行时，解压后通常可以直接运行，适合大多数用户。
+- **framework-dependent（精简）**：体积更小，但必须先安装最新的 [.NET Desktop Runtime 10 x64](https://dotnet.microsoft.com/en-us/download/dotnet/10.0)。普通 .NET Runtime 不足以运行 WPF 桌面应用。
+
+两种包都包含 LettucePlayer 所需的 mpv、FFmpeg、libplacebo、MediaInfo 等原生依赖。除 .NET 运行方式外，播放器功能一致。
+
 ## 快速开始
 
-1. 从 [Releases 页面](https://github.com/zhouzhou514/LettucePlayer-Releases/releases)下载明确列在 **Assets** 下的 Windows x64 绿色包。
+1. 从 [Releases 页面](https://github.com/zhouzhou514/LettucePlayer-Releases/releases) 下载明确列在 **Assets** 下的 Windows x64 绿色包；不确定时选择 self-contained 版本。
 2. 将 ZIP **完整解压**到一个可写目录，不要直接在压缩包内运行。
 3. 运行 `LettucePlayer.exe`。
 4. 通过文件选择器打开视频，或把视频文件/文件夹直接拖入播放器。
@@ -50,7 +59,7 @@
 ## 系统与运行边界
 
 - 目标平台：Windows 11 x64。
-- 采用绿色包发布，包内包含所需的 .NET 桌面运行时，通常无需另行安装 .NET Desktop Runtime。
+- self-contained 包包含所需的 .NET 桌面运行时；framework-dependent 包要求预先安装最新的 .NET Desktop Runtime 10 x64。
 - 仍依赖系统 D3D11 能力和可用的显卡驱动。
 - 第一版不支持 N-RAW、ProRes RAW、BRAW、R3D 等 RAW 视频。
 - 第一版不提供剪辑、导出、转码、专业节点调色、完整 OCIO / ACES / ICC 色彩管理或 HDR 输出。
